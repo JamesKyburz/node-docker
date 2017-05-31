@@ -1,13 +1,12 @@
-## Usage
+# docker-node
 
-# How to use this image
+## How to use this image
 
-## npm
-
-### Create a `Dockerfile` in your Node.js app project
+### Create a `Dockerfile`
 
 ```dockerfile
 FROM jameskyburz/node:8.0.0-alpine
+EXPOSE 5000
 ```
 
 ### Tell npm how to run your project in `package.json`
@@ -17,13 +16,26 @@ FROM jameskyburz/node:8.0.0-alpine
 }
 ```
 
-## Running
+### Create a `docker-compose.yml` file
 
-You can then build and run the Docker image:
+```yaml
+version: '3'
+services:
+  web:
+    build:
+      context: ./src/yourapp
+    restart: always
+```
+
+### Build
+```sh
+ᐅ docker-compose build
+```
+
+## Run the container
 
 ```sh
-ᐅ docker build -t my-nodejs-app .
-ᐅ docker run -it --rm --name my-running-app my-nodejs-app
+ᐅ docker-compose up
 ```
 
 ## Debugging with docker-compose
