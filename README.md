@@ -1,4 +1,4 @@
-# docker-node
+# node-docker
 
 ## How to use this image
 
