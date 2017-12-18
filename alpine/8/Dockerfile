@@ -12,5 +12,6 @@ ONBUILD RUN apk --no-cache add --virtual native-deps \
   npm install &&\
   npm cache clean --force &&\
   apk del native-deps
+ONBUILD RUN apk --no-cache add tzdata
 ONBUILD COPY . /usr/src/app
 ONBUILD CMD npm start
