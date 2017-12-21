@@ -1,6 +1,6 @@
 FROM node:8.9.3-alpine
 
-MAINTAINER James Kyburz "james.kyburz@gmail.com"
+LABEL maintainer="James Kyburz james.kyburz@gmail.com"
 
 ENV NPM_CONFIG_LOGLEVEL warn
 
