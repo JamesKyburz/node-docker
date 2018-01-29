@@ -8,6 +8,7 @@ ONBUILD WORKDIR /usr/src/app
 ONBUILD COPY package.json package-lock*.json npm-shrinkwrap*.json /usr/src/app/
 ONBUILD RUN apk --no-cache add --virtual native-deps \
   git g++ gcc libgcc libstdc++ linux-headers make python && \
+  yarn global add npm@latest && \
   npm install node-gyp -g &&\
   npm install &&\
   npm cache clean --force &&\
