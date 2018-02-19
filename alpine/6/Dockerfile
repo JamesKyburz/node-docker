@@ -2,7 +2,8 @@ FROM node:6.10.3-alpine
 
 LABEL maintainer="James Kyburz james.kyburz@gmail.com"
 
-ENV NPM_CONFIG_LOGLEVEL warn
+ONBUILD ARG NODE_ENV=development
+ONBUILD ENV NPM_CONFIG_LOGLEVEL warn
 
 ONBUILD WORKDIR /usr/src/app
 ONBUILD COPY package.json package-lock*.json npm-shrinkwrap*.json /usr/src/app/
