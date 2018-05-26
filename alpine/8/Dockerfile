@@ -1,4 +1,4 @@
-FROM node:8.11.0-alpine
+FROM node:8.11.2-alpine
 
 LABEL maintainer="James Kyburz james.kyburz@gmail.com"
 
