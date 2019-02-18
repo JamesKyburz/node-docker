@@ -1,20 +1,17 @@
-FROM node:10.15.0-alpine
+FROM jameskyburz/node:10.15.0-alpine-devtools as builder
+FROM node:10.15.1-alpine
 
 LABEL maintainer="James Kyburz james.kyburz@gmail.com"
 
-ONBUILD ARG NODE_ENV=development
+WORKDIR /usr/src/app
+
 ONBUILD ENV NPM_CONFIG_LOGLEVEL warn
-
-RUN npm install npm@latest -g
-
-ONBUILD WORKDIR /usr/src/app
+ONBUILD ARG NODE_ENV=development
 ONBUILD COPY package.json package-lock*.json npm-shrinkwrap*.json /usr/src/app/
-ONBUILD RUN apk --no-cache add --virtual native-deps \
-  git g++ gcc libgcc libstdc++ linux-headers make python && \
-  npm install node-gyp -g &&\
-  npm i &&\
-  npm cache clean --force &&\
-  apk del native-deps
-ONBUILD RUN apk --no-cache add tzdata
+ONBUILD RUN npm i
+
+WORKDIR /usr/src/app
+
+ONBUILD COPY --from=builder /usr/src/app/node_modules /usr/src/app/node_modules
 ONBUILD COPY . /usr/src/app
 ONBUILD CMD npm start
