@@ -1,5 +1,5 @@
-FROM jameskyburz/node:10.15.0-alpine-devtools as builder
-FROM node:10.15.1-alpine
+FROM jameskyburz/node:10.15.2-alpine-devtools as builder
+FROM node:10.15.2-alpine
 
 LABEL maintainer="James Kyburz james.kyburz@gmail.com"
 
