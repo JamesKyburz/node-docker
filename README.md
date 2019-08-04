@@ -4,9 +4,34 @@
 
 ### Create a `Dockerfile`
 
+Using `ONBUILD`
+
 ```dockerfile
-FROM jameskyburz/node:8.0.0-alpine
+FROM jameskyburz/node:10.16.1-alpine
 EXPOSE 5000
+```
+
+Using devtools (faster because of less cache invalidation)
+
+```dockerfile
+FROM jameskyburz/node:10.16.1-alpine-devtools as devtools
+
+WORKDIR /usr/src/app
+
+COPY package.json package-lock*.json npm-shrinkwrap*.json /usr/src/app/
+RUN npm i
+
+FROM node:10.16.1-alpine
+
+WORKDIR /usr/src/app
+
+COPY . /usr/src/app
+COPY --from=devtools /usr/src/app/node_modules /usr/src/app/node_modules
+
+USER node
+
+ENTRYPOINT ["node", "src/index"]
+CMD []
 ```
 
 ### Tell npm how to run your project in `package.json`
