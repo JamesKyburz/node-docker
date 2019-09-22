@@ -1,3 +1,4 @@
+# This repository is no longer maintained. See [node-docker-devtools](https://github.com/JamesKyburz/node-docker-devtools) instead.
 # node-docker
 
 ## How to use this image
